@@ -9,11 +9,7 @@ var resultCount = 0;
 
 $(document).ready(function () {
 
-
     $(document.body).on('click', '.area', function (event) {
-
-        renderResult($(this).attr('data'));
-
     });
 
     var myChart;
@@ -31,10 +27,6 @@ $(document).ready(function () {
             var b = Math.floor(Math.random() * 255);
             return "rgb(" + r + "," + g + "," + b + ",0.5)";
         };
-        // area: "TEST_AREA"
-        // desc: "TEMPLATE_A"
-        // offerId: "153425"
-        // postfix: "001"
         var countMap = {};
         var templates = [];
         for (var it of data) {
@@ -51,13 +43,6 @@ $(document).ready(function () {
                 } else {
                     countMap[l][rec.desc]++;
                 }
-                // if (!labels.includes(rec.area)) {
-                //     labels.push(rec.area);
-                //     datasets.push({
-                //         label: rec.area,
-                //         backgroundColor
-                //     })
-                // }
             }
         }
         var labels = Object.keys(countMap);
@@ -77,34 +62,6 @@ $(document).ready(function () {
         if (myChart) {
             myChart.destroy();
         }
-        // myChart = new Chart(ctx, {
-        //     type: 'doughnut',
-        //     data: {
-        //         labels: labels,
-        //         datasets: [{
-        //             label: '# of Votes',
-        //             data: values,
-        //             backgroundColor: color,
-        //             borderColor: color,
-        //             borderWidth: 1
-        //         }]
-        //     },
-        //     options: {
-        //         scales: {
-        //             yAxes: [{
-        //                 ticks: {
-        //                     beginAtZero: true
-        //                 }
-        //             }]
-        //         },
-        //         legend: {
-        //             labels: {
-        //                 // This more specific font property overrides the global property
-        //                 fontColor: 'black',
-        //                 fontSize: 15,
-        //             }
-        //         }
-        //     }
 
         myChart = new Chart(ctx, {
             type: 'bar',
@@ -246,6 +203,6 @@ $(document).ready(function () {
         }
     });
 
-
+    onChange();
 
 });
