@@ -1,0 +1,102 @@
+<html>
+
+<head>
+  <title>OD Test page</title>
+  <style>
+    canvas {
+
+      width: 700px !important;
+      height: 700px !important;
+
+    }
+  </style>
+
+</head>
+
+<body>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+
+  <div class="container">
+    <!-- http://datapipeline-api-dev.herokuapp.com/od?ci=SL2&p=IOS_Youth_Dashboard -->
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">OD URL</label>
+        <input type="text" class="form-control" id="inputURL" aria-describedby="url" placeholder="Generated OD url"
+          disabled>
+      </div>
+      <div class="form-group">
+        <label>Environment&nbsp;&nbsp;&nbsp;</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="envRadio" id="qaRadio" value="qa" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            QA
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="envRadio" id="devRadio" value="dev">
+          <label class="form-check-label" for="exampleRadios2">
+            DEV
+          </label>
+        </div>
+      </div>
+      <!-- User ID Prefix -->
+      <div class="form-group">
+        <label for="inputUserPrefix">Prefix of User IDs</label>
+        <input type="text" class="form-control" id="inputUserPrefix" placeholder="e.g.: test" value="test">
+        <small class="form-text text-muted">For example, entering "test" will generate user IDs TEST001, TEST002,
+          TEST003 ...</small>
+      </div>
+      <!-- Page -->
+      <div class="form-group">
+        <label for="inputPage">Page</label>
+        <select id="inputPage">
+          <option value="TestChannelLocation" selected>TestChannelLocation</option>
+          <option value="OLB_Account_Summary2">OLB_Account_Summary2</option>
+          <option value="Credit_Card_Txn_Details">Credit_Card_Txn_Details</option>
+          <option value="PDA_Txn_Details">PDA_Txn_Details</option>
+          <option value="myOffer_Portal">myOffer_Portal</option>
+          <option value="RewardsWeb">RewardsWeb</option>
+          <option value="Android_Dashboard">Android_Dashboard</option>
+          <option value="IOS_Dashboard">IOS_Dashboard</option>
+          <option value="IOS_Youth_Dashboard">IOS_Youth_Dashboard</option>
+        </select>
+        <small class="form-text text-muted">The page to view (&p=...), e.g.: TestChannelLocation</small>
+      </div>
+      <!-- Total Users -->
+      <div class="form-group">
+        <label for="inputTotal">Total number of test users (maximum: 99)</label>
+        <input type="number" step="1" class="form-control" id="inputTotal" placeholder="e.g.: 50" value="50" max="99"
+          min="1">
+        <small class="form-text text-muted">How many users to be generated and tested</small>
+      </div>
+      <button id="startButton" class="btn btn-primary">Start</button>
+      <button id="qaButton" class="btn">Default QA</button>
+      <button id="devButton" class="btn">Default Dev</button>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Iteration#</th>
+          <th scope="col">Client ID</th>
+          <th scope="col">Area</th>
+          <th scope="col">Offer ID</th>
+          <th scope="col">Offer Template</th>
+        </tr>
+      </thead>
+      <tbody id="result_table_body">
+
+      </tbody>
+    </table>
+
+    <canvas id="myChart" width="70" height="70"></canvas>
+
+  </div>
+  <script type="text/javascript" src="./od.js"></script>
+
+</body>
+
+</html>
