@@ -113,7 +113,7 @@ $(document).ready(function () {
                         offerStat = {};
 
                         if (rec.offerTemplate) {
-                            recList.push({ area: area.area, offerId: rec.offerId, desc: rec.offerTemplate, postfix: postfix, json: JSON.stringify(area).replace(/\"/g, "'") });
+                            recList.push({ area: area.area, offerId: rec.offerId, desc: rec.offerTemplate, postfix: postfix, json: encodeURI(JSON.stringify(area)) });
                         }
 
                     });
@@ -209,9 +209,15 @@ $(document).ready(function () {
     $('#resModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var data = button.data('res') // Extract info from data-* attributes
-        var json = JSON.stringify(JSON.parse(data.replace(/\'/g, '"').replace(/\"undefined\"/g, 'undefined')), null, 2);
-        $("#resModalBody").html('<pre class="prettyprint lang-js">' + json + '</pre>');
-        PR.prettyPrint();
+        console.log(data);
+        try {
+            var json = JSON.stringify(JSON.parse(decodeURI(data)), null, 2);
+            $("#resModalBody").html('<pre class="prettyprint lang-js">' + json + '</pre>');
+            PR.prettyPrint();
+        } catch (error) {
+            console.error(error);
+            $("#resModalBody").html('<pre class="prettyprint">ERROR</pre>');
+        }
     })
 
 });
