@@ -113,7 +113,7 @@ $(document).ready(function () {
                         offerStat = {};
 
                         if (rec.offerTemplate) {
-                            recList.push({ area: area.area, offerId: rec.offerId, desc: rec.offerTemplate, name: area.name, postfix: postfix });
+                            recList.push({ area: area.area, offerId: rec.offerId, desc: rec.offerTemplate, postfix: postfix, json: JSON.stringify(area).replace(/\"/g, "'") });
                         }
 
                     });
@@ -129,7 +129,8 @@ $(document).ready(function () {
                     table_data += '<td>' + rec.postfix + '</td>';
                     table_data += '<td class="area" data="' + rec.area + '">' + rec.area + '</td>';
                     table_data += '<td>' + rec.offerId + '</td>';
-                    table_data += '<td>' + rec.desc + '</td></tr>';
+                    table_data += '<td>' + rec.desc + '</td>';
+                    table_data += '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resModal" data-res="' + rec.json + '">View</button></td></tr>';
                 })
                 odCount++;
                 $('.table').append(table_data);
@@ -204,5 +205,13 @@ $(document).ready(function () {
     });
 
     onChange();
+
+    $('#resModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var data = button.data('res') // Extract info from data-* attributes
+        var json = JSON.stringify(JSON.parse(data.replace(/\'/g, '"').replace(/\"undefined\"/g, 'undefined')), null, 2);
+        $("#resModalBody").html('<pre class="prettyprint lang-js">' + json + '</pre>');
+        PR.prettyPrint();
+    })
 
 });
