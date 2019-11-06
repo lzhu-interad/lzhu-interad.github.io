@@ -36,6 +36,12 @@
       <div class="form-group">
         <label>Environment&nbsp;&nbsp;&nbsp;</label>
         <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="envRadio" id="uatRadio" value="uat" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            UAT
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="envRadio" id="qaRadio" value="qa" checked>
           <label class="form-check-label" for="exampleRadios1">
             QA
@@ -71,6 +77,14 @@
         </select>
         <small class="form-text text-muted">The page to view (&p=...), e.g.: TestChannelLocation</small>
       </div>
+      <!-- Show AB Testing Results Only? -->
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="abOnlyCheck" checked>
+        <label class="form-check-label" for="abOnlyCheck">
+          Show AB Testing Results Only?
+        </label>
+      </div>
+      <br/>
       <!-- Total Users -->
       <div class="form-group">
         <label for="inputTotal">Total number of test users (maximum: 99)</label>
@@ -79,6 +93,7 @@
         <small class="form-text text-muted">How many users to be generated and tested</small>
       </div>
       <button id="startButton" class="btn btn-primary">Start</button>
+      <button id="uatButton" class="btn">Default UAT</button>
       <button id="qaButton" class="btn">Default QA</button>
       <button id="devButton" class="btn">Default Dev</button>
     </form>

@@ -111,8 +111,7 @@ $(document).ready(function () {
                             offerStat[rec.offerId] = 1;
                         }
                         offerStat = {};
-
-                        if (rec.offerTemplate) {
+                        if (!$("#abOnlyCheck").is(":checked") ||rec.offerTemplate) {
                             recList.push({ area: area.area, offerId: rec.offerId, desc: rec.offerTemplate, postfix: postfix, json: encodeURI(JSON.stringify(area)) });
                         }
 
@@ -171,8 +170,10 @@ $(document).ready(function () {
     });
 
     function onChange() {
-        $('#inputURL').val('https://datapipeline-api-' + $("input[name='envRadio']:checked").val()
-            + '.herokuapp.com/od?ci=' + $("#inputUserPrefix").val().toUpperCase() + '001&p=' + $("#inputPage").val());
+        var env = $("input[name='envRadio']:checked").val();
+        var domain = env === 'uat' ? 'https://steoffer.rbc.com' : 'https://datapipeline-api-' + env + '.herokuapp.com';
+        $('#inputURL').val(domain
+            + '/od?ci=' + $("#inputUserPrefix").val().toUpperCase() + '001&p=' + $("#inputPage").val());
     }
 
     $('input').on('input', onChange);
@@ -184,6 +185,7 @@ $(document).ready(function () {
         $("#inputUserPrefix").val('TEST');
         $("#inputPage").val('IOS_Youth_Dashboard');
         $("#devRadio").prop("checked", true);
+        $("#abOnlyCheck").prop("checked", true);
         $("#inputTotal").val('10');
         onChange();
         if (myChart) {
@@ -197,6 +199,21 @@ $(document).ready(function () {
         $("#inputUserPrefix").val('TEST');
         $("#inputPage").val('TestChannelLocation');
         $("#qaRadio").prop("checked", true);
+        $("#abOnlyCheck").prop("checked", true);
+        $("#inputTotal").val('10');
+        onChange();
+        if (myChart) {
+            myChart.destroy();
+        }
+    });
+
+    $('#uatButton').click(function (e) {
+        e.preventDefault();
+        $("#result_table_body tr").remove();
+        $("#inputUserPrefix").val('TEST');
+        $("#inputPage").val('Android_Dashboard');
+        $("#uatRadio").prop("checked", true);
+        $("#abOnlyCheck").prop("checked", false);
         $("#inputTotal").val('10');
         onChange();
         if (myChart) {
@@ -209,7 +226,6 @@ $(document).ready(function () {
     $('#resModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var data = button.data('res') // Extract info from data-* attributes
-        console.log(data);
         try {
             var json = JSON.stringify(JSON.parse(decodeURI(data)), null, 2);
             $("#resModalBody").html('<pre class="prettyprint lang-js">' + json + '</pre>');
