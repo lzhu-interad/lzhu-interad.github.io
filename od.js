@@ -9,6 +9,8 @@ var resultCount = 0;
 
 $(document).ready(function () {
 
+    $("#inputPage, #inputPageText").val('TestChannelLocation');
+
     $(document.body).on('click', '.area', function (event) {
     });
 
@@ -173,17 +175,20 @@ $(document).ready(function () {
         var env = $("input[name='envRadio']:checked").val();
         var domain = env === 'uat' ? 'https://steoffer.rbc.com' : 'https://datapipeline-api-' + env + '.herokuapp.com';
         $('#inputURL').val(domain
-            + '/od?ci=' + $("#inputUserPrefix").val().toUpperCase() + '001&p=' + $("#inputPage").val());
+            + '/od?ci=' + $("#inputUserPrefix").val().toUpperCase() + '001&p=' + $("#inputPageText").val());
     }
 
     $('input').on('input', onChange);
+    $('#inputPage').change(function(evt) {
+        $('#inputPageText').val(evt.target.value)
+    });
     $('#inputPage').change(onChange);
 
     $('#devButton').click(function (e) {
         e.preventDefault();
         $("#result_table_body tr").remove();
         $("#inputUserPrefix").val('TEST');
-        $("#inputPage").val('IOS_Youth_Dashboard');
+        $("#inputPage, #inputPageText").val('IOS_Youth_Dashboard');
         $("#devRadio").prop("checked", true);
         $("#abOnlyCheck").prop("checked", true);
         $("#inputTotal").val('10');
@@ -197,7 +202,7 @@ $(document).ready(function () {
         e.preventDefault();
         $("#result_table_body tr").remove();
         $("#inputUserPrefix").val('TEST');
-        $("#inputPage").val('TestChannelLocation');
+        $("#inputPage, #inputPageText").val('TestChannelLocation');
         $("#qaRadio").prop("checked", true);
         $("#abOnlyCheck").prop("checked", true);
         $("#inputTotal").val('10');
@@ -211,7 +216,7 @@ $(document).ready(function () {
         e.preventDefault();
         $("#result_table_body tr").remove();
         $("#inputUserPrefix").val('TEST');
-        $("#inputPage").val('Android_Dashboard');
+        $("#inputPage, #inputPageText").val('Android_Dashboard');
         $("#uatRadio").prop("checked", true);
         $("#abOnlyCheck").prop("checked", false);
         $("#inputTotal").val('10');
