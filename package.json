@@ -1,0 +1,12 @@
+{
+  "name": "odtest",
+  "version": "1.0.0",
+  "main": "odtest.html",
+  "repository": "git@github.com:lzhu-interad/odtest.git",
+  "author": "Lingkai Zhu <lingkai.zhu@interadcorp.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "nodemon --exec \"serve\""
+   }
+}
