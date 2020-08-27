@@ -9,7 +9,7 @@ var resultCount = 0;
 
 $(document).ready(function () {
 
-    $("#inputPage, #inputPageText").val('TestChannelLocation');
+    $("#inputPage,#inputPageText").val('TestChannelLocation');
 
     $(document.body).on('click', '.area', function (event) {
     });
